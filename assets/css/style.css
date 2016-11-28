@@ -1,0 +1,18 @@
+html, body {
+    min-height: 100%;
+    min-width: 100%;
+    margin: 50px 0 0;
+    padding: 0;
+}
+.absolute-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.btn-tracking {
+    width: 10em;
+    height: 10em;
+    font-size: 2em;
+    border-radius: 50%;
+}

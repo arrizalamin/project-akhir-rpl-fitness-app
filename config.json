@@ -1,0 +1,8 @@
+{
+  "database": {
+    "host": "localhost",
+    "name": "rpl",
+    "user": "root",
+    "password": "root"
+  }
+}

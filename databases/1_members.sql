@@ -1,0 +1,7 @@
+-- UP
+CREATE TABLE IF NOT EXISTS members (
+  username VARCHAR(255) PRIMARY KEY,
+  password VARCHAR(255)
+);
+-- DOWN
+DROP TABLE IF EXISTS members;
