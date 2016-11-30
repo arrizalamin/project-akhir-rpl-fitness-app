@@ -65,4 +65,11 @@ class FitnessController extends BaseController
         }, []);
         return $this->app->render('calories', compact('statistics'));
     }
+    
+    public function deleteActivity($req)
+    {
+        if (! $this->validate($req, ['id'])) return $this->redirectBack();
+        $this->model->findBy('id', $req['id'])->delete();
+        return $this->redirect('/statistics');
+    }
 }

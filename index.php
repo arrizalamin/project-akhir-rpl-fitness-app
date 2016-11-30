@@ -36,6 +36,8 @@ $app->post('/color_scheme', 'GantiBackgroundController:simpanWarna');
 $app->get('/statistics', 'FitnessController:halamanStatistikAktifitas');
 $app->get('/statistics/calories', 'FitnessController:halamanStatistikKalori');
 
+$app->get('/activity/delete', 'FitnessController:deleteActivity');
+
 $app->get('/bmi', 'BmiController:halamanBmi');
 $app->post('/bmi', 'BmiController:calculate');
 

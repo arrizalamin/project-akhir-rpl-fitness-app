@@ -27,7 +27,7 @@
                         $activity->time,
                         date('M j Y', strtotime($activity->date))
                     ) ?>
-                    <a href="" class="need-confirmation btn btn-danger btn-xs pull-right">X</a>
+                    <a href="/activity/delete?id=<?php echo $activity->id ?>" class="need-confirmation btn btn-danger btn-xs pull-right">X</a>
                     <div class="clearfix"></div>
                     </li>
                     <?php endforeach ?>
