@@ -51,7 +51,7 @@
                     <div class="panel-footer">
                         <span class="pull-right">
                             <a href="/profile/edit" data-original-title="Edit this user" data-toggle="tooltip" type="button" class="btn btn-sm btn-warning"><i class="glyphicon glyphicon-edit"></i></a>
-                            <a data-original-title="Remove this user" data-toggle="tooltip" type="button" class="need-confirmation btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
+                            <a href="profile/delete" data-original-title="Remove this user" data-toggle="tooltip" type="button" class="need-confirmation btn btn-sm btn-danger"><i class="glyphicon glyphicon-remove"></i></a>
                         </span>
                         <div class="clearfix"></div>
                     </div>

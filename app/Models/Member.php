@@ -19,9 +19,13 @@ class Member extends Database
 
     public function verify(array $request) : bool
     {
-        $me = (new static)->findBy('username', $request['username']);
-        if (password_verify($request['password'], $me->password)) {
-            return true;
+        try {
+            $me = (new static)->findBy('username', $request['username']);
+            if (password_verify($request['password'], $me->password)) {
+                return true;
+            }
+        } catch (\InvalidArgumentException $e) {
+            return false;
         }
         return false;
     }
@@ -42,5 +46,13 @@ class Member extends Database
             'password' => password_hash($req['password'], PASSWORD_BCRYPT),
         ]);
         return (bool) $status;
+    }
+
+    public function update(array $data, string $primary = 'id') : bool
+    {
+        if (isset($data['password'])) {
+            $data['password'] = password_hash($data['password'], PASSWORD_BCRYPT);
+        }
+        return parent::update($data, 'username');
     }
 }

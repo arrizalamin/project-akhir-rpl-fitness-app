@@ -86,13 +86,13 @@ abstract class Database
         $data = array_map(function($key, $value) {
             return $key . '=' . $this->sanitize($value);
         }, array_keys($data), $data);
-        $query = sprintf("UPDATE %s SET %s WHERE %s=%s", $this->table, implode(', ', $data), $primary, $this->$primary);
+        $query = sprintf("UPDATE %s SET %s WHERE %s='%s'", $this->table, implode(', ', $data), $primary, $this->$primary);
         return mysqli_query(static::$connection, $query);
     }
 
     public function delete(string $primary = 'id') : bool
     {
-        $query = "DELETE FROM {$this->table} WHERE {$primary}={$this->$primary}";
+        $query = "DELETE FROM {$this->table} WHERE {$primary}='{$this->$primary}'";
         return mysqli_query(static::$connection, $query);
     }
 

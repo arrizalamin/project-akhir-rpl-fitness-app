@@ -28,11 +28,15 @@ $app->post('/store', 'FitnessController:storeResult');
 $app->get('/profile', 'ProfileController:halamanProfil');
 $app->get('/profile/edit', 'ProfileController:halamanEditProfil');
 $app->post('/profile/edit', 'ProfileController:simpanProfil');
+$app->get('/profile/delete', 'ProfileController:deleteProfile');
 
 $app->get('/statistics', 'FitnessController:halamanStatistikAktifitas');
 $app->get('/statistics/calories', 'FitnessController:halamanStatistikKalori');
 
 $app->get('/bmi', 'BmiController:halamanBmi');
 $app->post('/bmi', 'BmiController:calculate');
+
+$app->get('/goals', 'GoalController:halamanGoal');
+$app->post('/goals', 'GoalController:createGoal');
 
 $app->run();
