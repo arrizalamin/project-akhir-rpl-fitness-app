@@ -33,5 +33,6 @@ $app->get('/statistics', 'FitnessController:halamanStatistikAktifitas');
 $app->get('/statistics/calories', 'FitnessController:halamanStatistikKalori');
 
 $app->get('/bmi', 'BmiController:halamanBmi');
+$app->post('/bmi', 'BmiController:calculate');
 
 $app->run();
