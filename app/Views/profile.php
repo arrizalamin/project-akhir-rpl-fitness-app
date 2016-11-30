@@ -19,20 +19,20 @@
                                     <tbody>
                                         <tr>
                                             <td>username:</td>
-                                            <td>johndoe</td>
+                                            <td><?php echo $profile->username ?></td>
                                         </tr>
                                         <tr>
                                             <td>total activities:</td>
-                                            <td>17</td>
+                                            <td><?php echo $activities ?></td>
                                         </tr>
                                         <tr>
                                             <td>Total time spent:</td>
-                                            <td>96 hours</td>
+                                            <td><?php echo $total['time'] ?> seconds</td>
                                         </tr>
 
                                         <tr>
                                             <td>Total calories burned:</td>
-                                            <td>243</td>
+                                            <td><?php echo $total['calories'] ?></td>
                                         </tr>
 
                                     </tbody>

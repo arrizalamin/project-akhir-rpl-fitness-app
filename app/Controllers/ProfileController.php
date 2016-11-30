@@ -10,7 +10,14 @@ class ProfileController extends BaseController
 
     public function halamanProfil()
     {
-        return $this->app->render('profile');
+        $profile = Member::me();
+        $activities = count($profile->activities());
+        $total = array_reduce($profile->activities(), function($carry, $activity) {
+            $carry['time'] = $carry['time'] + $activity->time;
+            $carry['calories'] = $carry['calories'] + $activity->calories;
+            return $carry;
+        }, ['time' => 0, 'calories' => 0]);
+        return $this->app->render('profile', compact('profile', 'activities', 'total'));
     }
 
     public function halamanEditProfil()
