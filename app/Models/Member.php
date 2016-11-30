@@ -35,6 +35,11 @@ class Member extends Database
         return $this->hasMany(Activity::class, 'member_username', 'username');
     }
 
+    public function goals() : array
+    {
+        return $this->hasMany(Goal::class, 'member_username', 'username');
+    }
+
     public function register(array $req) : bool
     {
         try {

@@ -1,0 +1,12 @@
+-- UP
+CREATE TABLE IF NOT EXISTS goals (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  member_username VARCHAR(255) NOT NULL,
+  FOREIGN KEY (member_username) REFERENCES members (username)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  type VARCHAR(255) NOT NULL,
+  total INT NOT NULL
+);
+-- DOWN
+DROP TABLE IF EXISTS goals;
