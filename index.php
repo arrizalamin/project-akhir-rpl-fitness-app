@@ -30,6 +30,9 @@ $app->get('/profile/edit', 'ProfileController:halamanEditProfil');
 $app->post('/profile/edit', 'ProfileController:simpanProfil');
 $app->get('/profile/delete', 'ProfileController:deleteProfile');
 
+$app->get('/color_scheme', 'GantiBackgroundController:halamanGantiBackground');
+$app->post('/color_scheme', 'GantiBackgroundController:simpanWarna');
+
 $app->get('/statistics', 'FitnessController:halamanStatistikAktifitas');
 $app->get('/statistics/calories', 'FitnessController:halamanStatistikKalori');
 
