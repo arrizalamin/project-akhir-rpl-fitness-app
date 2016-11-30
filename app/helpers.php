@@ -8,3 +8,8 @@ function getToken() : array
         'password' => $token[1],
     ];
 }
+
+function dd($var)
+{
+    return die(var_dump($var));
+}

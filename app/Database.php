@@ -96,14 +96,14 @@ abstract class Database
         return mysqli_query(static::$connection, $query);
     }
 
-    protected function hasMany($model, $modelId, $currentModelId = 'id') : array
+    protected function hasMany($foreignModel, $foreignId, $modelId = 'id') : array
     {
-        return (new $model)->where($modelId, '=', $this->{$currentModelId})->get();
+        return (new $foreignModel)->where($foreignId, '=', $this->{$modelId})->get();
     }
 
-    protected function belongsTo($model, $currentModelId, $modelId = 'id')
+    protected function belongsTo($foreignModel, $foreignId, $modelId = 'id')
     {
-        return (new $model)->findBy($modelId, $this->{$currentModelId});
+        return (new $foreignModel)->findBy($modelId, $this->{$foreignId});
     }
 
     private function sanitize($value)

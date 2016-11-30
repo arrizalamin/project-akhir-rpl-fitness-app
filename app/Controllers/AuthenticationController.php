@@ -27,7 +27,7 @@ class AuthenticationController extends BaseController
         if (! $this->validate($req, ['username', 'password'])) {
             return $this->redirect('/login');
         }
-        if ($this->model->check($req)) {
+        if ($this->model->verify($req)) {
             $this->saveToken($req['username'], $req['password']);
             $this->redirect('/');
         }
@@ -65,7 +65,7 @@ class AuthenticationController extends BaseController
         if (! $this->validate($_COOKIE, ['token'])) {
             return $this->redirect('/login');
         }
-        if ( ! $this->model->check(getToken()) ) {
+        if ( ! $this->model->verify(getToken()) ) {
             return $this->logout();
         }
     }

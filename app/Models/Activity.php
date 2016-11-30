@@ -10,7 +10,7 @@ class Activity extends Database
 
     public function member() : Member
     {
-        return $this->belongsTo(Member::class, 'member_id');
+        return $this->belongsTo(Member::class, 'member_username', 'username');
     }
 
     public function create($req) : bool
@@ -19,6 +19,8 @@ class Activity extends Database
             'member_username' => getToken()['username'],
             'type' => $req['type'],
             'time' => (int) $req['time'],
+            'calories' => $req['calories'],
+            'date' => date('Y-m-d'),
         ]);
     }
 }

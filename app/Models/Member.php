@@ -8,27 +8,27 @@ class Member extends Database
 {
     public $table = 'members';
 
-    public static function me($username, $password) : Member {
-        $me = (new static)->findBy('username', $username);
-        if (password_verify($password, $me->password)) {
-            return $me;
+    public static function me() : Member {
+        $instance = new static();
+        $token = getToken();
+        if ($instance->verify($token)) {
+            return $instance->findBy('username', $token['username']);
         }
-        throw new \InvalidArgumentException("username and password didn't match");
+        throw new \BadMethodCallException("token is not valid");
     }
 
-    public function check(array $request) : bool
+    public function verify(array $request) : bool
     {
-        try {
-            $this->me($request['username'], $request['password']);
-        } catch(\InvalidArgumentException $e) {
-            return false;
+        $me = (new static)->findBy('username', $request['username']);
+        if (password_verify($request['password'], $me->password)) {
+            return true;
         }
-        return true;
+        return false;
     }
 
-    public function barang() : array
+    public function activities() : array
     {
-        return $this->hasMany(Barang::class, 'admin_id');
+        return $this->hasMany(Activity::class, 'member_username', 'username');
     }
 
     public function register(array $req) : bool

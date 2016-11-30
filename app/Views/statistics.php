@@ -19,26 +19,18 @@
             <div class="row">
                 <h3>Activities</h3>
                 <ul class="list-group">
+                    <?php foreach ($activities as $activity) : ?>
                     <li class="list-group-item">
-                    Running 4 minutes on Oct 25
+                    <?php printf(
+                        '%s %d seconds on %s',
+                        $activity->type,
+                        $activity->time,
+                        date('M j Y', strtotime($activity->date))
+                    ) ?>
                     <a href="" class="need-confirmation btn btn-danger btn-xs pull-right">X</a>
                     <div class="clearfix"></div>
                     </li>
-                    <li class="list-group-item">
-                    Running 10 minutes on Oct 23
-                    <a href="" class="need-confirmation btn btn-danger btn-xs pull-right">X</a>
-                    <div class="clearfix"></div>
-                    </li>
-                    <li class="list-group-item">
-                    Cycling 40 minutes on Oct 12
-                    <a href="" class="need-confirmation btn btn-danger btn-xs pull-right">X</a>
-                    <div class="clearfix"></div>
-                    </li>
-                    <li class="list-group-item">
-                    Sit Up 2 minutes on Oct 31
-                    <a href="" class="need-confirmation btn btn-danger btn-xs pull-right">X</a>
-                    <div class="clearfix"></div>
-                    </li>
+                    <?php endforeach ?>
                 </ul>
             </div>
         </div>
@@ -49,31 +41,14 @@
         $(document).ready(function() {
             Morris.Bar({
                 element: 'bar-example',
-                data: [{
-                    day: '2016-11-01',
-                    burned: 20
-                }, {
-                    day: '2016-11-02',
-                    burned: 10
-                }, {
-                    day: '2016-11-03',
-                    burned: 5
-                }, {
-                    day: '2016-11-04',
-                    burned: 2
-                }, {
-                    day: '2016-11-05',
-                    burned: 2
-                }, {
-                    day: '2016-11-06',
-                    burned: 2
-                }, {
-                    day: '2016-11-07',
-                    burned: 2
-                }, {
-                    day: '2016-11-08',
-                    burned: 20
-                }],
+                data: [
+                    <?php foreach ($statistics as $day => $burned) : ?>
+                    {
+                        day: '<?php echo $day ?>',
+                        burned: <?php echo $burned ?>,
+                    },
+                    <?php endforeach ?>
+                ],
                 xkey: 'day',
                 ykeys: ['burned'],
                 labels: ['Burned Calories']
