@@ -25,31 +25,14 @@
         $(document).ready(function() {
             Morris.Line({
                 element: 'line-example',
-                data: [{
-                    day: '2016-11-01',
-                    burned: 20
-                }, {
-                    day: '2016-11-02',
-                    burned: 10
-                }, {
-                    day: '2016-11-03',
-                    burned: 5
-                }, {
-                    day: '2016-11-04',
-                    burned: 2
-                }, {
-                    day: '2016-11-05',
-                    burned: 2
-                }, {
-                    day: '2016-11-06',
-                    burned: 2
-                }, {
-                    day: '2016-11-07',
-                    burned: 2
-                }, {
-                    day: '2016-11-08',
-                    burned: 20
-                }],
+                data: [
+                    <?php foreach ($statistics as $day => $burned) : ?>
+                    {
+                        day: '<?php echo $day ?>',
+                        burned: <?php echo $burned ?>,
+                    },
+                    <?php endforeach ?>
+                ],
                 xkey: 'day',
                 ykeys: ['burned'],
                 labels: ['Burned Calories']

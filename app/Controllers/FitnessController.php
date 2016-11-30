@@ -51,4 +51,18 @@ class FitnessController extends BaseController
         }, []);
         return $this->app->render('statistics', compact('activities', 'statistics'));
     }
+
+    public function halamanStatistikKalori()
+    {
+        $activities = Member::me()->activities();
+        $statistics = array_reduce($activities, function ($carry, $activity) {
+            if (isset($carry[$activity->date])) {
+                $carry[$activity->date] = $carry[$activity->date] + $activity->calories;
+                return $carry;
+            }
+            $carry[$activity->date] = $activity->calories;
+            return $carry;
+        }, []);
+        return $this->app->render('calories', compact('statistics'));
+    }
 }
