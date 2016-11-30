@@ -14,12 +14,13 @@
                     </div>
                     <div class="panel-body">
                         <div class="form-group">
-                            <select class="form-control" name="color">
-                                <option value="#FFFFFF">#FFFFFF</option>
-                                <option value="#FFD948">#FFD948</option>
-                                <option value="#FFF248">#FFF248</option>
-                                <option value="#FFBF48">#FFBF48</option>
-                            </select>
+                            <input type="color" class="form-control" name="color" value="#ffffff">
+<!--                            <select class="form-control" name="color">-->
+<!--                                <option value="#FFFFFF">#FFFFFF</option>-->
+<!--                                <option value="#FFD948">#FFD948</option>-->
+<!--                                <option value="#FFF248">#FFF248</option>-->
+<!--                                <option value="#FFBF48">#FFBF48</option>-->
+<!--                            </select>-->
                         </div>
                     </div>
                     <div class="panel-footer">

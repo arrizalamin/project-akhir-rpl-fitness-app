@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS activities (
     ON UPDATE CASCADE,
   type VARCHAR(255) NOT NULL,
   time INT NOT NULL,
-  calories INT NOT NULL,
+  calories DOUBLE NOT NULL,
   date DATE NOT NULL
 );
 -- DOWN

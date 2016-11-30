@@ -13,7 +13,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="/profile">Profile</a></li>
                 <li class="dropdown">
-                    <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Reports</a>
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Statistics</a>
                     <ul class="dropdown-menu">
                         <li><a href="/statistics/calories">Calories Burned</a></li>
                         <li><a href="/statistics">Time Spent</a></li>

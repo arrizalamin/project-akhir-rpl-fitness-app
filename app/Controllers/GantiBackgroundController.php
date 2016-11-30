@@ -13,7 +13,9 @@ class GantiBackgroundController extends BaseController
 
     public function simpanWarna($req)
     {
-        if (! $this->validate($req, ['color'])) return $this->redirectBack();
+        if (! $this->validate($req, ['color'])) {
+            return $this->redirectBack(['error' => 'form is not valid']);
+        }
         Member::me()->update($req);
         return $this->redirect('/profile');
     }

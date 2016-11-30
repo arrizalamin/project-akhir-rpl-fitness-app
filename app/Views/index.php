@@ -3,6 +3,13 @@
 <?php require_once 'head.php' ?>
 <body>
 <?php require_once 'navbar.php' ?>
+<div class="container">
+    <?php if (isset($req['error'])) : ?>
+        <div class="alert alert-danger text-center" role="alert">
+            <?php echo $req['error'] ?>
+        </div>
+    <?php endif ?>
+</div>
 <form method="post" action="/store" class="absolute-center form-tracking">
     <div class="form-group">
         <select name="type" class="form-control" required>

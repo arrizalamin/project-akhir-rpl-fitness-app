@@ -17,41 +17,41 @@ class AuthenticationController extends BaseController
         $this->model = new Member();
     }
 
-    public function halamanLogin()
+    public function halamanLogin($req)
     {
-        return $this->app->render('login');
+        return $this->app->render('login', compact('req'));
     }
 
     public function login($req)
     {
         if (! $this->validate($req, ['username', 'password'])) {
-            return $this->redirect('/login');
+            return $this->redirectBack(['error' => 'form is not valid']);
         }
         if ($this->model->verify($req)) {
             $this->saveToken($req['username'], $req['password']);
             $this->redirect('/');
         }
-        $this->redirect('/login');
+        $this->redirectBack(['error' => 'username and password combination is not valid']);
     }
 
-    public function halamanRegister()
+    public function halamanRegister($req)
     {
-        return $this->app->render('register');
+        return $this->app->render('register', compact('req'));
     }
 
     public function register($req)
     {
         if (! $this->validate($req, ['username', 'password', 'password_confirmation'])) {
-            return $this->redirect('/register');
+            return $this->redirectBack(['error' => 'form is not valid']);
         }
         if ($req['password'] !== $req['password_confirmation']) {
-            return $this->redirect('/register');
+            return $this->redirectBack(['error' => 'password and password confirmation are not matched']);
         }
         if ($this->model->register($req)) {
             $this->saveToken($req['username'], $req['password']);
             return $this->redirect('/');
         }
-        return $this->redirect('/register');
+        return $this->redirect('/register', ['error' => 'username is not available']);
     }
 
     public function logout()
@@ -73,7 +73,6 @@ class AuthenticationController extends BaseController
     private function saveToken($username, $password)
     {
         $token = base64_encode($username . ':' . $password);
-        echo base64_decode($token);
         setcookie('token', $token, time() + (60 * 60 * 24));
     }
 }

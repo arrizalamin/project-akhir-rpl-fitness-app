@@ -58,7 +58,7 @@ class MVC
 
     public function render($name, array $args = [])
     {
-        $view = $this->viewDir . str_replace('.', '/', $name) . '.php';
+        $view = $this->viewDir . $name . '.php';
         extract($args);
         include_once $view;
     }

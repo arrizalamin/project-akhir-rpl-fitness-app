@@ -9,6 +9,11 @@
                 <div class="alert alert-info" role="alert">
                     BMI : <?php echo $req['result'] ?>
                 </div>
+                <div class="row">
+                    <p>
+                        <img src="/assets/img/bmi.jpg" class="center-block img-responsive" style="max-width: 300px">
+                    </p>
+                </div>
             <?php endif ?>
             <div class="well">
                 <div class="form-group">

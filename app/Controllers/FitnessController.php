@@ -18,22 +18,26 @@ class FitnessController extends BaseController
         $this->model = new Activity();
     }
 
-    public function halamanTracking()
+    public function halamanTracking($req)
     {
-        return $this->app->render('index');
+        return $this->app->render('index', compact('req'));
     }
 
     public function storeResult($req)
     {
-        if (! $this->validate($req, ['type', 'time'])) return $this->redirectBack();
+        if (! $this->validate($req, ['type', 'time'])) {
+            return $this->redirectBack(['error' => 'form is not valid']);
+        }
 
         $calc = new Calculator([
-            ['type' => 'Running', 'calories' => 3.7],
-            ['type' => 'Cycling', 'calories' => 2.9],
-            ['type' => 'Walking', 'calories' => 2.35],
+            ['type' => 'Running', 'calories' => 0.16],
+            ['type' => 'Cycling', 'calories' => 0.1],
+            ['type' => 'Walking', 'calories' => 0.03],
         ]);
         $req['calories'] = $calc->calculate($req['type'], $req['time']);
-        if (! $this->model->create($req)) return $this->redirectBack();
+        if (! $this->model->create($req)) {
+            return $this->redirectBack(['error' => 'internal server error']);
+        }
 
         return $this->redirect('/statistics');
     }
@@ -41,7 +45,8 @@ class FitnessController extends BaseController
     public function halamanStatistikAktifitas()
     {
         $activities = Member::me()->activities();
-        $statistics = array_reduce($activities, function ($carry, $activity) {
+        $statistics = array_reduce($activities, function ($carry, Activity $activity) {
+            $activity->member();
             if (isset($carry[$activity->date])) {
                 $carry[$activity->date] = $carry[$activity->date] + $activity->calories;
                 return $carry;
@@ -55,7 +60,7 @@ class FitnessController extends BaseController
     public function halamanStatistikKalori()
     {
         $activities = Member::me()->activities();
-        $statistics = array_reduce($activities, function ($carry, $activity) {
+        $statistics = array_reduce($activities, function ($carry, Activity $activity) {
             if (isset($carry[$activity->date])) {
                 $carry[$activity->date] = $carry[$activity->date] + $activity->calories;
                 return $carry;
@@ -68,7 +73,9 @@ class FitnessController extends BaseController
     
     public function deleteActivity($req)
     {
-        if (! $this->validate($req, ['id'])) return $this->redirectBack();
+        if (! $this->validate($req, ['id'])) {
+            return $this->redirectBack(['error' => 'form is not valid']);
+        }
         $this->model->findBy('id', $req['id'])->delete();
         return $this->redirect('/statistics');
     }

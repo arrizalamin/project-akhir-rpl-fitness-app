@@ -22,9 +22,10 @@
                     <?php foreach ($activities as $activity) : ?>
                     <li class="list-group-item">
                     <?php printf(
-                        '%s %d seconds on %s',
+                        '%s %d seconds and burned %s calories on %s',
                         $activity->type,
                         $activity->time,
+                        $activity->calories,
                         date('M j Y', strtotime($activity->date))
                     ) ?>
                     <a href="/activity/delete?id=<?php echo $activity->id ?>" class="need-confirmation btn btn-danger btn-xs pull-right">X</a>

@@ -36,7 +36,9 @@ class GoalController extends BaseController
     
     public function createGoal($req)
     {
-        if (! $this->validate($req, ['type', 'total'])) return $this->redirectBack();
+        if (! $this->validate($req, ['type', 'total'])) {
+            return $this->redirectBack(['error' => 'form is not valid']);
+        }
         $this->model->create($req);
         return $this->redirect('/goals');
     }

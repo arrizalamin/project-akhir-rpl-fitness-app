@@ -21,15 +21,20 @@ class BaseController
         exit();
     }
 
-    public function redirect($path)
+    public function redirect($path, $query = [])
     {
-        header('Location: ' . $path);
+        $queryString = "";
+        if (count($query) > 0) {
+            $queryString = "?" . http_build_query($query);
+        }
+
+        header('Location: ' . $path . $queryString);
         exit();
     }
 
-    public function redirectBack()
+    public function redirectBack($query = [])
     {
-        $this->redirect($_SERVER['HTTP_REFERER']);
+        $this->redirect($_SERVER['HTTP_REFERER'], $query);
     }
 
     protected function validate(array $var, array $rules) : bool {

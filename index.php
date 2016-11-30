@@ -6,7 +6,8 @@ use App\MVC;
 require_once 'autoloader.php';
 require_once 'app/helpers.php';
 
-$connection = new mysqli('localhost', 'root', 'root', 'rpl');
+$dbConfig = json_decode(file_get_contents('config.json'))->database;
+$connection = new mysqli($dbConfig->host, $dbConfig->user, $dbConfig->password, $dbConfig->name);
 Database::setConnection($connection);
 
 $app = new MVC();

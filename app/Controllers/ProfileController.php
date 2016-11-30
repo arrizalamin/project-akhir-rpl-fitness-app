@@ -28,9 +28,13 @@ class ProfileController extends BaseController
 
     public function simpanProfil($req)
     {
-        if (! $this->validate($req, ['username', 'password'])) return $this->redirectBack();
+        if (! $this->validate($req, ['username', 'password'])) {
+            return $this->redirectBack(['error' => 'form is not valid']);
+        }
         $profile = Member::me();
-        $profile->update($req);
+        if (! $profile->update($req)) {
+            $this->redirectBack(['error' => 'username is not available']);
+        }
         return $this->redirect('/profile');
     }
 
